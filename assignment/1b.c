@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<stdlib.h>
+main()
+{
+	printf("Hello..\n");
+	if(fork()==0)
+	{
+		execl("/bin/ls","ls",NULL);
+	}
+	else
+	{
+		wait(0);
+		if(fork()==0)
+		{
+			execl("/bin/pwd","pwd",NULL);
+		}
+		else
+		{
+			wait(0);
+			if(fork()==0)
+			{
+				execl("/usr/bin/cal","cal",NULL);
+			}
+			else
+			{
+				wait(0);
+				printf("I'm Printf..\n");
+			}
+		}
+	}
+}
